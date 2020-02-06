@@ -13,7 +13,7 @@ Essas instruções fornecerão uma cópia do projeto em execução na sua máqui
 * Clone ou baixe o repositório para o seu computador
 * Copile usando a linha de comando **dotnet build**
 * Navegue até a pasta do projeto e execute a linha de comando **dotnet run**
-* Acesse no seu browser a url https://localhost:5001/
+* Acesse no seu browser a url https://localhost:5001/swagger
 
 ### Executando os testes de integração
 * Execute os testes de integração com o comando **dotnet test**
