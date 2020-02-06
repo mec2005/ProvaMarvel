@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Marvel.Api.Domain.Models.Entities;
+﻿using Marvel.Api.Domain.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Marvel.Data

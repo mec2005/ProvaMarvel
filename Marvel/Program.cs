@@ -16,16 +16,16 @@ namespace Marvel
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
 
             // Inicializar o contexto do banco de dados (in memory) do json retirado da api da marvel.
             DataGenerator.InitializeCharacters(host);
 
-            await host.RunAsync();
+            host.Run();
         }
-                
+
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();

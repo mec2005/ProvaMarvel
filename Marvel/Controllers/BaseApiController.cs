@@ -1,5 +1,6 @@
 ﻿using Marvel.Api.Domain.Models.Entities;
 using Marvel.Domain.Containers;
+using Marvel.Domain.Results;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Marvel.Controllers
 {
-    public class BaseApiController<T> : ControllerBase
+    public abstract class BaseApiController<T> : ControllerBase
         where T : class, new()
     {
-        public DataWrapper<T> CreateWrapper(HttpStatusCode code, IEnumerable<T> list)
-            //where T : class, new()
+        [ApiExplorerSettings(IgnoreApi = true)]
+        private DataWrapper<T> CreateWrapper(HttpStatusCode code, IEnumerable<T> list)
         {
             return new DataWrapper<T>()
             {
@@ -31,23 +32,27 @@ namespace Marvel.Controllers
             };
         }
 
-        public string GetStatusReason(HttpStatusCode statusCode)
+        [ApiExplorerSettings(IgnoreApi = true)]
+        private string GetStatusReason(HttpStatusCode statusCode)
         {
-            return Regex.Replace(statusCode.ToString(), "(\\B[A-Z])", " $1");
+            return statusCode == HttpStatusCode.OK? 
+                statusCode.ToString(): Regex.Replace(statusCode.ToString(), "(\\B[A-Z])", " $1");
         }
 
-        public ActionResult<DataWrapper<T>> GetResult(IEnumerable<T> listOfItems) 
+        [ApiExplorerSettings(IgnoreApi = true)]
+        protected ActionResult<DataWrapper<T>> GetResult(IEnumerable<T> items)
         {
-            if (listOfItems.Any())
+            if (items.Any())
             {
-                var wrapper = CreateWrapper(HttpStatusCode.OK, listOfItems);
+                var wrapper = CreateWrapper(HttpStatusCode.OK, items);
                 return Ok(wrapper);
             }
 
             return StatusCode((int)HttpStatusCode.NotFound, "We couldn't find that item.");
         }
 
-        public ActionResult<DataWrapper<T>> GetResult(T item)
+        [ApiExplorerSettings(IgnoreApi = true)]
+        protected ActionResult<DataWrapper<T>> GetResult(T item)
         {
             if (item != null)
             {

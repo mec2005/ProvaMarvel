@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Marvel.Api.Domain.Models.Entities;
 using Marvel.Domain.Containers;
@@ -9,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Marvel.Controllers
 {
+    [Produces("application/json")]
     [Route("v1/public/[controller]")]
     [ApiController]
     public class CharactersController : BaseApiController<Character>
@@ -21,8 +20,8 @@ namespace Marvel.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<DataWrapper<Character>>> Get()
-        {            
+        public async Task<ActionResult<DataWrapper<Character>>> GetAll()
+        {
             return GetResult(await _characterService.GetCharacters());
         }
 
@@ -32,30 +31,30 @@ namespace Marvel.Controllers
             return GetResult(await _characterService.GetCharacterById(characterId));
         }
 
-        #region Not Implemented
+        #region Not Implemented Actions
         [HttpGet("{characterId}/comics")]
         public ActionResult<string> GetComics(int characterId)
         {
-            return BadRequest(new NotImplementedException());
+            return BadRequest("Not implemented");
         }
 
         [HttpGet("{characterId}/events")]
         public ActionResult<string> GetEvents(int characterId)
         {
-            return BadRequest(new NotImplementedException());
+            return BadRequest("Not implemented");
         }
 
         [HttpGet("{characterId}/series")]
         public ActionResult<string> GetSeries(int characterId)
         {
-            return BadRequest(new NotImplementedException());
+            return BadRequest("Not implemented");
         }
 
         [HttpGet("{characterId}/stories")]
         public ActionResult<string> GetStories(int characterId)
         {
-            return BadRequest(new NotImplementedException());
-        } 
+            return BadRequest("Not implemented");
+        }
         #endregion
     }
 }

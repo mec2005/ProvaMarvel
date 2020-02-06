@@ -1,0 +1,3 @@
+﻿---
+- Pasta para adicionar as viewmodels que seriam retornadas pelas controllers.
+---

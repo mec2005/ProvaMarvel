@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using Marvel.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 
 namespace Marvel.Api.Tests
 {
